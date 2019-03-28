@@ -1,0 +1,30 @@
+date2String: function (date, templet) {
+      var year, month, day, hour, minutes, seconds, short_year, full_month, full_day, full_hour, full_minutes, full_seconds;
+      if (!templet)
+        templet = "yyyy-mm-dd";
+      year = date.getFullYear().toString();
+      if (year.length < 4) {// 处理年份小于1000的情况
+        if (year.length == 0)
+          year = "0000";
+        else if (year.length == 1)
+          year = "000" + year;
+        else if (year.length == 2)
+          year = "00" + year;
+        else if (year.length == 3)
+          year = "0" + year;
+      }
+      // if (year.length > 4) year = year.substring(0, 4);
+      short_year = year.substring(2, 4);
+      month = (date.getMonth() + 1);
+      full_month = month < 10 ? "0" + month : month;
+      day = date.getDate();
+      full_day = day < 10 ? "0" + day : day;
+      hour = date.getHours();
+      full_hour = hour < 10 ? "0" + hour : hour;
+      minutes = date.getMinutes();
+      full_minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = date.getSeconds();
+      full_seconds = seconds < 10 ? "0" + seconds : seconds;
+      return templet.replace("yyyy", year).replace("mm", full_month).replace("dd", full_day).replace("yy", short_year).replace("m", month).replace("d", day)
+          .replace("hh", full_hour).replace("ii", full_minutes).replace("ss", full_seconds).replace("h", hour).replace("i", minutes).replace("s", seconds);
+    }
